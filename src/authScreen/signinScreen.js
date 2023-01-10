@@ -1,14 +1,22 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import TextInputComp from '../components/textInput';
 import {hp, wp} from '../helper/global';
 import {appImage} from '../helper/image';
+import {Context as AuthContext} from '../context/authContext';
 import {navigate, goBack} from '../helper/navigationRef';
+import {Snackbar} from 'react-native-paper';
 
 const SigninScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [visible, setVisible] = React.useState(false);
 
+  const onToggleSnackBar = () => setVisible(!visible);
+
+  const onDismissSnackBar = () => setVisible(false);
+
+  const {state, signIn} = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => goBack()}>
@@ -74,7 +82,11 @@ const SigninScreen = () => {
       </Text>
 
       <TouchableOpacity
-        onPress={() => navigate('tab')}
+        disabled={(email == '', password == '')}
+        onPress={async () => {
+          await signIn({email, password});
+          onToggleSnackBar();
+        }}
         style={{
           backgroundColor: '#FF748C',
           marginVertical: hp(4),
@@ -163,6 +175,14 @@ const SigninScreen = () => {
           />
         </TouchableOpacity>
       </View>
+      {state?.errormessage != '' ? (
+        <Snackbar
+          duration={2000}
+          visible={visible}
+          onDismiss={onDismissSnackBar}>
+          {state?.errormessage}
+        </Snackbar>
+      ) : null}
     </View>
   );
 };

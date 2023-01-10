@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {hp} from '../helper/global';
 import {appImage} from '../helper/image';
 import {navigate} from '../helper/navigationRef';
+import {Context as AuthContext} from '../context/authContext';
 
 const LoadingScreen = () => {
+  const {tryLocalSignin} = useContext(AuthContext);
+
+  useEffect(() => {
+    tryLocalSignin();
+  }, []);
   return (
     <>
       <View style={styles.container1}>
