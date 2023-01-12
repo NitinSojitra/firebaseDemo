@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Header from '../components/header';
-import {navigate} from '../helper/navigationRef';
 
 const SettingScreen = () => {
   return (
@@ -12,10 +11,7 @@ const SettingScreen = () => {
           flex: 1,
           justifyContent: 'center',
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigate('signin');
-          }}>
+        <TouchableOpacity onPress={() => {}}>
           <Text
             style={{
               fontSize: 18,

@@ -28,8 +28,6 @@ const tryLocalSignin = dispatch => async () => {
 
 const signUp = dispatch => {
   return async ({email, conPassword}) => {
-    console.log(email, 'asasas');
-    console.log(conPassword, 'asasas');
     await auth()
       .createUserWithEmailAndPassword(email, conPassword)
       .then(async userCredential => {

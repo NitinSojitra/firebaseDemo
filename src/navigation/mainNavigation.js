@@ -8,6 +8,7 @@ import SignupScreen from '../authScreen/signupScreen';
 import {hp} from '../helper/global';
 import {appImage} from '../helper/image';
 import {navigationRef} from '../helper/navigationRef';
+import DescriptionScreen from '../screen/descriptionScreen';
 import HomeScreen from '../screen/homeScreen';
 import LoadingScreen from '../screen/loadingScreen';
 import SettingScreen from '../screen/settingScreen';
@@ -72,20 +73,19 @@ export const TabNavigation = () => {
         activeTintColor: 'white',
         inactiveTintColor: 'black',
       }}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={Settings} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Settings" component={SettingScreen} />
     </Tab.Navigator>
   );
 };
 
-export const Settings = () => {
+export const Home = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Setting"
+      initialRouteName="Home"
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Setting" component={SettingScreen} />
-      <Stack.Screen name="signin" component={SigninScreen} />
-      <Stack.Screen name="signup" component={SignupScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="desc" component={DescriptionScreen} />
     </Stack.Navigator>
   );
 };
